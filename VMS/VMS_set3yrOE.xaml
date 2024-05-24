@@ -1,0 +1,561 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="VMS_set3yrOE" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:c="clr-namespace:Credentials_Managed_by_Orchestrator;assembly=Credentials_Managed_by_Orchestrator" xmlns:dba="clr-namespace:DHK.BigQuery.Activities;assembly=DHK.BigQuery.Activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:SendSlackMessage;assembly=SendSlackMessage" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:usa="clr-namespace:UiPath.Shared.Activities;assembly=DHK.BigQuery.Activities" xmlns:wv="clr-namespace:WESANG.VMS;assembly=WESANG.VMS" xmlns:wva="clr-namespace:WESANG.VMS.Activities;assembly=WESANG.VMS.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_Restaurant_ID" Type="InArgument(x:String)" />
+    <x:Property Name="out_OeSet_Result" Type="OutArgument(x:String)" />
+    <x:Property Name="in_Oe_Reason" Type="InArgument(x:String)" />
+    <x:Property Name="in_Oe_Description" Type="InArgument(x:String)" />
+    <x:Property Name="in_Oe_StartDate" Type="InArgument(x:String)" />
+    <x:Property Name="in_Oe_EndDate" Type="InArgument(x:String)" />
+    <x:Property Name="in_Company_No" Type="InArgument(x:String)" />
+    <x:Property Name="in_Restaurant_Name" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1694,2358</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>BackEnd_set10yrOE_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="56">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>UiPath.GSuite</x:String>
+      <x:String>UiPath.GSuite.Contracts</x:String>
+      <x:String>UiPath.GSuite.Activities.Enums</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.GSuite.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>Google.Apis.Drive.v3.Data</x:String>
+      <x:String>Google.Apis.Requests</x:String>
+      <x:String>UiPath.GSuite.Activities.Drive</x:String>
+      <x:String>UiPath.GSuite.Activities.Contracts</x:String>
+      <x:String>UiPath.GSuite.Activities.Sheets</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>SendSlackMessage</x:String>
+      <x:String>UiPath.Shared.Activities.ConnectionService.Contracts</x:String>
+      <x:String>VMS_Restaurant_Temporary_Closed</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>WESANG.VMS.Enums</x:String>
+      <x:String>WESANG.VMS.Activities</x:String>
+      <x:String>WESANG.VMS</x:String>
+      <x:String>Credentials_Managed_by_Orchestrator</x:String>
+      <x:String>DHK.BigQuery.Activities</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="51">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.GSuite.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Data.Entity</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.GSuite</AssemblyReference>
+      <AssemblyReference>UiPath.GSuite.Activities</AssemblyReference>
+      <AssemblyReference>DHK.NHNToast.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Callout.Activity</AssemblyReference>
+      <AssemblyReference>UiPath.Form.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>Google.Apis.Drive.v3</AssemblyReference>
+      <AssemblyReference>Google.Apis</AssemblyReference>
+      <AssemblyReference>Google.Apis.Core</AssemblyReference>
+      <AssemblyReference>SendSlackMessage</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>VMS_Restaurant_Temporary Closed</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>WESANG.VMS</AssemblyReference>
+      <AssemblyReference>WESANG.VMS.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>Credentials_Managed_by_Orchestrator</AssemblyReference>
+      <AssemblyReference>DHK.BigQuery.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="VMS_set3yrOE" sap:VirtualizedContainerService.HintSize="1704,2293" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:Int32" Name="holiday_ID" />
+      <Variable x:TypeArguments="x:String" Name="계약상태" />
+      <Variable x:TypeArguments="x:String" Name="가게상태" />
+      <Variable x:TypeArguments="x:String" Name="JsonPath" />
+      <Variable x:TypeArguments="x:String" Name="SQLString" />
+      <Variable x:TypeArguments="x:Int32" Name="Restaurant_ID" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <wva:VMSAccessScope ContinueOnError="{x:Null}" DisplayName="VMS Access Scope" sap:VirtualizedContainerService.HintSize="1662,2201" Id="[in_Config(&quot;VMS_id&quot;).ToString]" sap2010:WorkflowViewState.IdRef="VMSAccessScope_2" Password="[TryCast(in_Config(&quot;VMS_password&quot;), System.Security.SecureString)]" Url="REAL">
+      <wva:VMSAccessScope.Body>
+        <ActivityAction x:TypeArguments="wv:IObjectContainer">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="wv:IObjectContainer" Name="ScopeActivity" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="1628,2115" sap2010:WorkflowViewState.IdRef="Sequence_80">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign sap:VirtualizedContainerService.HintSize="1586,60" sap2010:WorkflowViewState.IdRef="Assign_26">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[Restaurant_ID]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">[Convert.ToInt32(in_Restaurant_ID)]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <wva:VMSGetVendorInfomation Alliance_check="{x:Null}" App_display_check="{x:Null}" ContinueOnError="{x:Null}" Phone_display_check="{x:Null}" Vendor_name="{x:Null}" exception="{x:Null}" sap2010:Annotation.AnnotationText="가게 계약상태 확인" Contract_status="[계약상태]" DisplayName="VMS Get Vendor Infomation" sap:VirtualizedContainerService.HintSize="1586,115" sap2010:WorkflowViewState.IdRef="VMSGetVendorInfomation_2" Open_status_display="[가게상태]" TimeoutMS="60000" Vendor_id="[Restaurant_ID]">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </wva:VMSGetVendorInfomation>
+            <If sap2010:Annotation.AnnotationText="가게 계약 상태에 따른 분기처리" Condition="[계약상태 = &quot;termination&quot; Or 계약상태 = &quot;termination_in_progress&quot;]" sap:VirtualizedContainerService.HintSize="1586,1768" sap2010:WorkflowViewState.IdRef="If_5">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="418,774" sap2010:WorkflowViewState.IdRef="Sequence_70">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign sap:VirtualizedContainerService.HintSize="376,60" sap2010:WorkflowViewState.IdRef="Assign_27">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[out_OeSet_Result]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">OE 설정 실패 (이미 계약 해지된 가게)</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Sequence DisplayName="OE 수행 결과 업데이트 Sequence" sap:VirtualizedContainerService.HintSize="376,582" sap2010:WorkflowViewState.IdRef="Sequence_69">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="RetryScope_4" NumberOfRetries="10">
+                      <ui:RetryScope.ActivityBody>
+                        <ActivityAction>
+                          <Sequence DisplayName="액션" sap:VirtualizedContainerService.HintSize="326,233" sap2010:WorkflowViewState.IdRef="Sequence_67">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <Delay Duration="00:00:30" sap:VirtualizedContainerService.HintSize="284,22" sap2010:WorkflowViewState.IdRef="Delay_4" />
+                            <c:Download_BigQueryJson BigQuery_JsonPath="[JsonPath]" sap:VirtualizedContainerService.HintSize="284,79" sap2010:WorkflowViewState.IdRef="Download_BigQueryJson_7">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </c:Download_BigQueryJson>
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:RetryScope.ActivityBody>
+                      <ui:RetryScope.Condition>
+                        <ActivityFunc x:TypeArguments="x:Boolean" />
+                      </ui:RetryScope.Condition>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:RetryScope>
+                    <dba:BigQueryScope ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="빅쿼리 실패 대상 업데이트" DisplayName="Big query scope" sap:VirtualizedContainerService.HintSize="334,53" sap2010:WorkflowViewState.IdRef="BigQueryScope_4" Json_key="[JsonPath]" Project_id="rgpkorea-operations">
+                      <dba:BigQueryScope.Body>
+                        <ActivityAction x:TypeArguments="usa:IObjectContainer">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="usa:IObjectContainer" Name="ScopeActivity" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,394" sap2010:WorkflowViewState.IdRef="Sequence_68">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <Assign sap2010:Annotation.AnnotationText="&quot;UPDATE `rgpkorea-operations.cxdt_auto.t_close_company_list` SET OE_Result = '폐업 OE 설정 실패' WHERE restaurant_id = &quot; + CurrentRow(&quot;restaurant_id&quot;).ToString" sap:VirtualizedContainerService.HintSize="334,147" sap2010:WorkflowViewState.IdRef="Assign_28">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">[SQLString]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String">["UPDATE `rgpkorea-operations.cxdt_auto.t_close_company_list` SET OE_Result = '폐업 OE 설정 실패' WHERE restaurant_id = " + Restaurant_ID.ToString]</InArgument>
+                              </Assign.Value>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </Assign>
+                            <dba:ExecuteQuery ContinueOnError="{x:Null}" Result="{x:Null}" sap2010:Annotation.AnnotationText="결과 업데이트" DisplayName="Execute Query" sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="ExecuteQuery_4" Sql="[SQLString]">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </dba:ExecuteQuery>
+                          </Sequence>
+                        </ActivityAction>
+                      </dba:BigQueryScope.Body>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </dba:BigQueryScope>
+                    <ui:Delete ContinueOnError="{x:Null}" ResourceFile="{x:Null}" sap:VirtualizedContainerService.HintSize="334,132" sap2010:WorkflowViewState.IdRef="Delete_4" Path="[JsonPath]" />
+                    <s:SendSlackMessage MentionChannel="{x:Null}" MentionHere="{x:Null}" Success="{x:Null}" TimeoutMS="{x:Null}" UserEmail="{x:Null}" sap2010:Annotation.AnnotationText="임시휴무일 설정 실패시 슬랙 알림" BotUsername="[in_Config(&quot;Slack_BotUsername&quot;).ToString]" Channel="[in_Config(&quot;error_Slack_Channel&quot;).ToString]" ContinueOnError="True" DisplayName="Send slack message" sap:VirtualizedContainerService.HintSize="334,163" sap2010:WorkflowViewState.IdRef="SendSlackMessage_5" Message="[&quot;```&quot; + in_Company_No + &quot; / &quot; + in_Restaurant_Name + &quot; / &quot; + Restaurant_ID.ToString + &quot; / &quot; + &quot;폐업 3년 OE 설정 실패 (이미 폐업 진행 중 가게)&quot; + &quot;```&quot;]" Token="[in_Config(&quot;Slack_Token&quot;).ToString]">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </s:SendSlackMessage>
+                  </Sequence>
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence sap:VirtualizedContainerService.HintSize="1123,1580" sap2010:WorkflowViewState.IdRef="Sequence_79">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <wva:VMSCreateTempHolidaySchedule ContinueOnError="True" Description="[in_Oe_Description]" DisplayName="VMS Create Temp Holiday Schedule" End_date="[in_Oe_EndDate]" sap:VirtualizedContainerService.HintSize="1081,228" sap2010:WorkflowViewState.IdRef="VMSCreateTempHolidaySchedule_2" Order_type="delivery" Start_date="[in_Oe_StartDate]" Temp_hoilday_id="[holiday_ID]" Temp_holiday_reason="[in_Oe_Reason]" TimeoutMS="60000" Vendor_id="[Convert.ToInt32(in_Restaurant_ID)]">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </wva:VMSCreateTempHolidaySchedule>
+                  <If Condition="[holiday_ID &gt; 0]" DisplayName="If oe설정 체크" sap:VirtualizedContainerService.HintSize="1081,1220" sap2010:WorkflowViewState.IdRef="If_4">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If.Then>
+                      <Sequence sap:VirtualizedContainerService.HintSize="518,1063" sap2010:WorkflowViewState.IdRef="Sequence_74">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Assign sap:VirtualizedContainerService.HintSize="476,60" sap2010:WorkflowViewState.IdRef="Assign_29">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[out_OeSet_Result]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">["OE 설정 성공, OE 설정 시작일 ( " + in_Oe_StartDate + " )"]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <s:SendSlackMessage MentionChannel="{x:Null}" MentionHere="{x:Null}" Success="{x:Null}" TimeoutMS="{x:Null}" UserEmail="{x:Null}" sap2010:Annotation.AnnotationText="폐업 설정시 슬랙 알림 (임시 휴무일 값 추가)" BotUsername="[in_Config(&quot;Slack_BotUsername&quot;).ToString]" Channel="[in_Config(&quot;error_Slack_Channel&quot;).ToString]" ContinueOnError="True" DisplayName="Send slack message" sap:VirtualizedContainerService.HintSize="476,163" sap2010:WorkflowViewState.IdRef="SendSlackMessage_6" Message="[&quot;``` 가게 아이디 : &quot;+ in_Restaurant_Name + &quot; / 임시 휴무일 ID: &quot; +in_Restaurant_ID + &quot; /시작: &quot; + in_Oe_StartDate + &quot; /종료: &quot; + in_Oe_EndDate + &quot; /휴무 종류: &quot; + in_Oe_Reason + &quot;```&quot;]" Token="[in_Config(&quot;Slack_Token&quot;).ToString]">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </s:SendSlackMessage>
+                        <Sequence DisplayName="OE 수행 결과 업데이트 Sequence" sap:VirtualizedContainerService.HintSize="476,668" sap2010:WorkflowViewState.IdRef="Sequence_73">
+                          <Sequence.Variables>
+                            <Variable x:TypeArguments="x:String" Name="JsonPath" />
+                          </Sequence.Variables>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="434,22" sap2010:WorkflowViewState.IdRef="RetryScope_5" NumberOfRetries="10">
+                            <ui:RetryScope.ActivityBody>
+                              <ActivityAction>
+                                <Sequence DisplayName="액션" sap:VirtualizedContainerService.HintSize="326,233" sap2010:WorkflowViewState.IdRef="Sequence_71">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <Delay Duration="00:00:30" sap:VirtualizedContainerService.HintSize="284,22" sap2010:WorkflowViewState.IdRef="Delay_5" />
+                                  <c:Download_BigQueryJson BigQuery_JsonPath="[JsonPath]" sap:VirtualizedContainerService.HintSize="284,79" sap2010:WorkflowViewState.IdRef="Download_BigQueryJson_8">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </c:Download_BigQueryJson>
+                                </Sequence>
+                              </ActivityAction>
+                            </ui:RetryScope.ActivityBody>
+                            <ui:RetryScope.Condition>
+                              <ActivityFunc x:TypeArguments="x:Boolean" />
+                            </ui:RetryScope.Condition>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:RetryScope>
+                          <dba:BigQueryScope ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="빅쿼리 성공 대상 업데이트" DisplayName="Big query scope" sap:VirtualizedContainerService.HintSize="434,139" sap2010:WorkflowViewState.IdRef="BigQueryScope_5" Json_key="[JsonPath]" Project_id="rgpkorea-operations">
+                            <dba:BigQueryScope.Body>
+                              <ActivityAction x:TypeArguments="usa:IObjectContainer">
+                                <ActivityAction.Argument>
+                                  <DelegateInArgument x:TypeArguments="usa:IObjectContainer" Name="ScopeActivity" />
+                                </ActivityAction.Argument>
+                                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Sequence_72">
+                                  <Sequence.Variables>
+                                    <Variable x:TypeArguments="x:String" Name="SQLString" />
+                                  </Sequence.Variables>
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <Assign sap2010:Annotation.AnnotationText="&quot;UPDATE `rgpkorea-operations.cxdt_auto.t_close_company_list` SET OE_Result = '폐업 OE 설정 성공' WHERE restaurant_id = &quot; + CurrentRow(&quot;restaurant_id&quot;).ToString" sap:VirtualizedContainerService.HintSize="334,147" sap2010:WorkflowViewState.IdRef="Assign_30">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="x:String">[SQLString]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="x:String">["UPDATE `rgpkorea-operations.cxdt_auto.t_close_company_list` SET OE_Result = '폐업 OE 설정 성공' WHERE restaurant_id = " + in_Restaurant_ID]</InArgument>
+                                    </Assign.Value>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </Assign>
+                                  <dba:ExecuteQuery ContinueOnError="{x:Null}" Result="{x:Null}" sap2010:Annotation.AnnotationText="결과 업데이트" DisplayName="Execute Query" sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="ExecuteQuery_5" Sql="[SQLString]">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </dba:ExecuteQuery>
+                                </Sequence>
+                              </ActivityAction>
+                            </dba:BigQueryScope.Body>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </dba:BigQueryScope>
+                          <ui:Delete ContinueOnError="{x:Null}" ResourceFile="{x:Null}" sap:VirtualizedContainerService.HintSize="434,132" sap2010:WorkflowViewState.IdRef="Delete_5" Path="[JsonPath]" />
+                          <s:SendSlackMessage MentionChannel="{x:Null}" MentionHere="{x:Null}" Success="{x:Null}" TimeoutMS="{x:Null}" UserEmail="{x:Null}" sap2010:Annotation.AnnotationText="임시휴무일 설정 성공시 슬랙 알림" BotUsername="[in_Config(&quot;Slack_BotUsername&quot;).ToString]" Channel="[in_Config(&quot;error_Slack_Channel&quot;).ToString]" ContinueOnError="True" DisplayName="Send slack message" sap:VirtualizedContainerService.HintSize="434,163" sap2010:WorkflowViewState.IdRef="SendSlackMessage_7" Message="[&quot;```&quot; + in_Company_No + &quot; / &quot; + in_Restaurant_Name + &quot; / &quot; + in_Restaurant_ID + &quot; / &quot; + &quot;폐업 3년 OE 설정 성공&quot; + &quot;```&quot;]" Token="[in_Config(&quot;Slack_Token&quot;).ToString]">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </s:SendSlackMessage>
+                        </Sequence>
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence sap:VirtualizedContainerService.HintSize="518,860" sap2010:WorkflowViewState.IdRef="Sequence_78">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Assign sap:VirtualizedContainerService.HintSize="476,60" sap2010:WorkflowViewState.IdRef="Assign_31">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[out_OeSet_Result]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">OE 설정 실패 (자동화 재수행 필요)</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <Sequence DisplayName="OE 수행 결과 업데이트 Sequence" sap:VirtualizedContainerService.HintSize="476,668" sap2010:WorkflowViewState.IdRef="Sequence_77">
+                          <Sequence.Variables>
+                            <Variable x:TypeArguments="x:String" Name="JsonPath" />
+                          </Sequence.Variables>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="434,22" sap2010:WorkflowViewState.IdRef="RetryScope_6" NumberOfRetries="10">
+                            <ui:RetryScope.ActivityBody>
+                              <ActivityAction>
+                                <Sequence DisplayName="액션" sap:VirtualizedContainerService.HintSize="326,233" sap2010:WorkflowViewState.IdRef="Sequence_75">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <Delay Duration="00:00:30" sap:VirtualizedContainerService.HintSize="284,22" sap2010:WorkflowViewState.IdRef="Delay_6" />
+                                  <c:Download_BigQueryJson BigQuery_JsonPath="[JsonPath]" sap:VirtualizedContainerService.HintSize="284,79" sap2010:WorkflowViewState.IdRef="Download_BigQueryJson_9">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </c:Download_BigQueryJson>
+                                </Sequence>
+                              </ActivityAction>
+                            </ui:RetryScope.ActivityBody>
+                            <ui:RetryScope.Condition>
+                              <ActivityFunc x:TypeArguments="x:Boolean" />
+                            </ui:RetryScope.Condition>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:RetryScope>
+                          <dba:BigQueryScope ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="빅쿼리 실패 대상 업데이트" DisplayName="Big query scope" sap:VirtualizedContainerService.HintSize="434,139" sap2010:WorkflowViewState.IdRef="BigQueryScope_6" Json_key="[JsonPath]" Project_id="rgpkorea-operations">
+                            <dba:BigQueryScope.Body>
+                              <ActivityAction x:TypeArguments="usa:IObjectContainer">
+                                <ActivityAction.Argument>
+                                  <DelegateInArgument x:TypeArguments="usa:IObjectContainer" Name="ScopeActivity" />
+                                </ActivityAction.Argument>
+                                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Sequence_76">
+                                  <Sequence.Variables>
+                                    <Variable x:TypeArguments="x:String" Name="SQLString" />
+                                  </Sequence.Variables>
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <Assign sap2010:Annotation.AnnotationText="&quot;UPDATE `rgpkorea-operations.cxdt_auto.t_close_company_list` SET OE_Result = '폐업 OE 설정 실패' WHERE restaurant_id = &quot; + CurrentRow(&quot;restaurant_id&quot;).ToString" sap:VirtualizedContainerService.HintSize="334,147" sap2010:WorkflowViewState.IdRef="Assign_32">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="x:String">[SQLString]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="x:String">["UPDATE `rgpkorea-operations.cxdt_auto.t_close_company_list` SET OE_Result = '폐업 OE 설정 실패' WHERE restaurant_id = " + in_Restaurant_ID]</InArgument>
+                                    </Assign.Value>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </Assign>
+                                  <dba:ExecuteQuery ContinueOnError="{x:Null}" Result="{x:Null}" sap2010:Annotation.AnnotationText="결과 업데이트" DisplayName="Execute Query" sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="ExecuteQuery_6" Sql="[SQLString]">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </dba:ExecuteQuery>
+                                </Sequence>
+                              </ActivityAction>
+                            </dba:BigQueryScope.Body>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </dba:BigQueryScope>
+                          <ui:Delete ContinueOnError="{x:Null}" ResourceFile="{x:Null}" sap:VirtualizedContainerService.HintSize="434,132" sap2010:WorkflowViewState.IdRef="Delete_6" Path="[JsonPath]" />
+                          <s:SendSlackMessage MentionChannel="{x:Null}" MentionHere="{x:Null}" Success="{x:Null}" TimeoutMS="{x:Null}" UserEmail="{x:Null}" sap2010:Annotation.AnnotationText="임시휴무일 설정 실패시 슬랙 알림" BotUsername="[in_Config(&quot;Slack_BotUsername&quot;).ToString]" Channel="[in_Config(&quot;error_Slack_Channel&quot;).ToString]" ContinueOnError="True" DisplayName="Send slack message" sap:VirtualizedContainerService.HintSize="434,163" sap2010:WorkflowViewState.IdRef="SendSlackMessage_8" Message="[&quot;```&quot; + in_Company_No + &quot; / &quot; + in_Restaurant_Name + &quot; / &quot; + in_Restaurant_ID + &quot; / &quot; + &quot;폐업 3년 OE 설정 실패&quot; + &quot;```&quot;]" Token="[in_Config(&quot;Slack_Token&quot;).ToString]">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </s:SendSlackMessage>
+                        </Sequence>
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                </Sequence>
+              </If.Else>
+            </If>
+          </Sequence>
+        </ActivityAction>
+      </wva:VMSAccessScope.Body>
+    </wva:VMSAccessScope>
+  </Sequence>
+</Activity>
